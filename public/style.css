@@ -148,6 +148,24 @@ body {
     object-fit: cover;
     border-radius: 12px;
 }
+.muteBtn {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.45);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 15px;
+    font-size: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    z-index: 5;
+    transition: 0.3s ease;
+}
+
+.muteBtn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
 
 /* Section Padding */
 section {
