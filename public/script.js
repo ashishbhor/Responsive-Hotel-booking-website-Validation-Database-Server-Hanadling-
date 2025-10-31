@@ -94,22 +94,87 @@ window.addEventListener("scroll", function () {
   }, INTERVAL);
 })();
 
-
-
-// Media Slider Functionality
+// About Media Slider Functionality
 const slides = document.querySelectorAll(".media-slider .slide");
 let currentSlide = 0;
+const video = document.getElementById("heroVideo");
+const muteBtn = document.getElementById("muteBtn");
+let isAboutVisible = true; // section visibility flag
 
+// ✅ Make sure video is muted initially for autoplay to work
+video.muted = true;
+
+// Show slide logic
 function showSlide(index) {
-    slides.forEach(slide => slide.classList.remove("active"));
-    slides[index].classList.add("active");
+  slides.forEach(slide => slide.classList.remove("active"));
+  slides[index].classList.add("active");
+
+  const vid = slides[index].querySelector("video");
+  if (vid && isAboutVisible) {
+    vid.currentTime = 0;
+    vid.play().catch(() => {});
+  }
 }
 
-// Auto-slide every 5 seconds
-setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
+// Get slide duration
+function getSlideDuration(slide) {
+  const vid = slide.querySelector("video");
+  if (vid) {
+    return new Promise(resolve => {
+      if (vid.readyState >= 1) {
+        resolve(vid.duration * 1000);
+      } else {
+        vid.addEventListener("loadedmetadata", () => {
+          resolve(vid.duration * 1000);
+        });
+      }
+    });
+  } else {
+    return Promise.resolve(8000); // images = 5s
+  }
+}
+
+// Main slider loop
+async function startSlider() {
+  while (true) {
     showSlide(currentSlide);
-}, 5000);
+    const duration = await getSlideDuration(slides[currentSlide]);
+    currentSlide = (currentSlide + 1) % slides.length;
+    await new Promise(resolve => setTimeout(resolve, duration));
+  }
+}
+
+// Mute/unmute button
+muteBtn.addEventListener("click", () => {
+  video.muted = !video.muted;
+  muteBtn.textContent = video.muted ? "🔇" : "🔊";
+});
+
+// Pause video when not visible
+const aboutSection = document.getElementById("about");
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        isAboutVisible = true;
+        if (slides[currentSlide].querySelector("video")) {
+          slides[currentSlide].querySelector("video").play().catch(() => {});
+        }
+      } else {
+        isAboutVisible = false;
+        const activeVid = slides[currentSlide].querySelector("video");
+        if (activeVid) activeVid.pause();
+      }
+    });
+  },
+  { threshold: 0.3 } // plays only when 30% visible
+);
+
+observer.observe(aboutSection);
+
+// Start the slider
+startSlider();
+
 
 // Amount calculateNightsAndTotal
 document.addEventListener('DOMContentLoaded', function () {
