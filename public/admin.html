@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Admin - Bookings</title>
+    <style>
+        body {
+            font-family: system-ui, Arial;
+            margin: 20px
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px
+        }
+
+        th {
+            background: #f3f3f3
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Bookings</h2>
+    <table id="tbl">
+        <thead>
+            <tr>
+                <th>BookingID</th>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Total</th>
+                <th>Created</th>
+                <th>Receipt</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        async function load() {
+            const res = await fetch('/api/bookings');
+            const rows = await res.json();
+            const tb = document.querySelector('#tbl tbody');
+            tb.innerHTML = rows.map(b => `
+        <tr>
+          <td>${b.bookingId}</td>
+          <td>${b.status}</td>
+          <td>${(b.personal?.firstName || b.personal?.fullName || '') + ' ' + (b.personal?.lastName || '')}</td>
+          <td>${b.account?.loginEmail || b.personal?.email || ''}</td>
+          <td>${b.stay?.checkIn || ''}</td>
+          <td>${b.stay?.checkOut || ''}</td>
+          <td>₹${b.amounts?.total || 0}</td>
+          <td>${new Date(b.createdAt).toLocaleString()}</td>
+          <td><a href="/api/bookings/${b.bookingId}/receipt.pdf" target="_blank">PDF</a></td>
+        </tr>
+      `).join('');
+        }
+        load();
+    </script>
+</body>
+
+</html>

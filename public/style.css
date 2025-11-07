@@ -188,13 +188,154 @@ section {
 }
 
 /* Booking Form Styles */
-#bookingForm .form-control, #bookingForm .form-select {
-    padding: 10px;
-    border-radius: 5px;
+
+.villa-booking-wrapper * {
+    box-sizing: border-box;
 }
 
-#bookingForm .form-check-input {
-    margin-top: 0.3rem;
+.villa-booking-wrapper {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #d8f0e9;
+    padding: 20px 0;
+    color: #222;
+}
+
+/* Layout */
+.villa-booking-wrapper .villa-container {
+    display: flex;
+    max-width: 960px;
+    margin: 20px auto;
+    height: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgb(0 0 0 / 0.08);
+    overflow: hidden;
+}
+
+.villa-booking-wrapper .villa-sidebar {
+    width: 220px;
+    background-color: #c9e9e4;
+    padding: 2rem 1.5rem;
+    border-radius: 12px 0 0 12px;
+}
+
+.villa-booking-wrapper .villa-sidebar h2 {
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #177d6a;
+}
+
+.villa-booking-wrapper .villa-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.villa-booking-wrapper .villa-sidebar ul li {
+    font-weight: 600;
+    margin-bottom: 1.8rem;
+    cursor: pointer;
+    color: #555;
+    padding-left: 24px;
+    position: relative;
+}
+
+.villa-booking-wrapper .villa-sidebar ul li.active {
+    color: #177d6a;
+    font-weight: 700;
+}
+
+.villa-booking-wrapper .villa-sidebar ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #20b2aa;
+}
+
+.villa-booking-wrapper .villa-sidebar ul li.active::before {
+    background-color: #20b2aa;
+}
+
+.villa-booking-wrapper .villa-content-card {
+    flex: 1;
+    padding: 3rem 2.5rem;
+    overflow-y: auto;
+}
+
+/* Form Inputs */
+.villa-booking-wrapper input,
+.villa-booking-wrapper select {
+    padding: 12px 16px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1.7px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.villa-booking-wrapper input:focus,
+.villa-booking-wrapper select:focus {
+    border-color: #20b2aa;
+}
+
+/* Buttons */
+.villa-booking-wrapper button {
+    background-color: #20b2aa;
+    color: white;
+    padding: 12px 36px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.villa-booking-wrapper button:disabled {
+    background-color: #9ddbcf;
+}
+
+.villa-booking-wrapper button:hover:not(:disabled) {
+    background-color: #177d6a;
+}
+
+/* Villa Cards */
+.villa-booking-wrapper .villa-card {
+    border: 1.4px solid #ccc;
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.villa-booking-wrapper .villa-card.selected {
+    border-color: #20b2aa;
+    box-shadow: 0 2px 8px rgba(32, 178, 170, 0.4);
+}
+
+.villa-booking-wrapper .villa-card img {
+    width: 100px;
+    height: 65px;
+    border-radius: 8px;
+}
+
+/* Preview Box */
+.villa-booking-wrapper .villa-preview-box {
+    background: #eaf8f5;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    color: #177d6a;
+}
+
+/* Error Message */
+.villa-booking-wrapper .error-message {
+    color: #b30000;
+    font-size: 0.85rem;
 }
 
 /* Responsive Adjustments */
@@ -215,6 +356,8 @@ section {
 }
 
 /* Booking Summary */
-#bookingSummary {
-    border: 1px solid #dee2e6;
+@media (max-width: 720px) {
+    .villa-booking-wrapper .villa-container {
+        flex-direction: column;
+    }
 }

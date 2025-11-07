@@ -18,10 +18,12 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -306,282 +308,27 @@
     </section>
 
     <!-- Booking Section -->
-    <section id="booking" class="py-5 bg-light">
-      <div class="container">
-        <h2 class="text-center fw-bold mb-5">Book Your Stay</h2>
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <div class="card shadow">
-              <div class="card-body p-4">
-                <form id="bookingForm">
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <label for="loginEmail" class="form-label"
-                        >Email address</label
-                      >
-                      <input
-                        type="email"
-                        class="form-control"
-                        id="loginEmail"
-                        required
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <label for="loginPassword" class="form-label"
-                        >Password</label
-                      >
-                      <input
-                        type="password"
-                        class="form-control"
-                        id="loginPassword"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <label for="fullName" class="form-label">Full Name</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="fullName"
-                        required
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <label for="dob" class="form-label">Date of Birth</label>
-                      <input
-                        type="date"
-                        class="form-control"
-                        id="dob"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="aadhar" class="form-label"
-                      >Aadhar Card Number</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="aadhar"
-                      pattern="[0-9]{12}"
-                      required
-                    />
-                    <div class="form-text">
-                      12-digit Aadhar number without spaces or dashes
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <label for="checkIn" class="form-label"
-                        >Check-in Date</label
-                      >
-                      <input
-                        type="date"
-                        class="form-control"
-                        id="checkIn"
-                        required
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <label for="checkOut" class="form-label"
-                        >Check-out Date</label
-                      >
-                      <input
-                        type="date"
-                        class="form-control"
-                        id="checkOut"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <label for="adults" class="form-label">Adults</label>
-                      <select class="form-select" id="adults" required>
-                        <option value="1">1</option>
-                        <option value="2" selected>2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="children" class="form-label"
-                        >Children (under 12)</label
-                      >
-                      <select class="form-select" id="children">
-                        <option value="0" selected>0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">Room Type</label>
-                    <div class="row g-3">
-                      <div class="col-md-4">
-                        <div class="card h-100">
-                          <img
-                            src="assets/mumbai-room.jpg"
-                            class="card-img-top"
-                            alt="Deluxe Room"
-                          />
-                          <div class="card-body">
-                            <h5 class="card-title">Casa del Mar</h5>
-                            <p class="card-text">₹50,000/night</p>
-                            <div class="form-check">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="roomType"
-                                id="deluxeRoom"
-                                value="deluxe"
-                                checked
-                              />
-                              <label class="form-check-label" for="deluxeRoom">
-                                Select
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="card h-100">
-                          <img
-                            src="assets/raj-room.jpg"
-                            class="card-img-top"
-                            alt="Family Apartment"
-                          />
-                          <div class="card-body">
-                            <h5 class="card-title">Dunecrest Villa</h5>
-                            <p class="card-text">₹28,000/night</p>
-                            <div class="form-check">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="roomType"
-                                id="familyApartment"
-                                value="family"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="familyApartment"
-                              >
-                                Select
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="card h-100">
-                          <img
-                            src="assets/himchal-room.jpg"
-                            class="card-img-top"
-                            alt="Luxury Villa"
-                          />
-                          <div class="card-body">
-                            <h5 class="card-title">Luxury Villa</h5>
-                            <p class="card-text">₹30,000/night</p>
-                            <div class="form-check">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="roomType"
-                                id="luxuryVilla"
-                                value="villa"
-                              />
-                              <label class="form-check-label" for="luxuryVilla">
-                                Select
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mb-3 form-check">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="termsCheck"
-                      required
-                    />
-                    <label class="form-check-label" for="termsCheck"
-                      >I agree to the terms and conditions</label
-                    >
-                  </div>
-
-                  <button type="submit" class="btn btn-primary w-100 py-2">
-                    Proceed to Payment
-                  </button>
-                </form>
-
-                <!-- Booking Summary -->
-                <div
-                  id="bookingSummary"
-                  class="mt-4 p-3 bg-light rounded d-none"
-                >
-                  <h4 class="mb-3">Booking Summary</h4>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <p>
-                        <strong>Name:</strong> <span id="summaryName"></span>
-                      </p>
-                      <p>
-                        <strong>Check-in:</strong>
-                        <span id="summaryCheckIn"></span>
-                      </p>
-                      <p>
-                        <strong>Check-out:</strong>
-                        <span id="summaryCheckOut"></span>
-                      </p>
-                      <p>
-                        <strong>Nights:</strong>
-                        <span id="summaryNights"></span>
-                      </p>
-                    </div>
-                    <div class="col-md-6">
-                      <p>
-                        <strong>Room Type:</strong>
-                        <span id="summaryRoomType"></span>
-                      </p>
-                      <p>
-                        <strong>Adults:</strong>
-                        <span id="summaryAdults"></span>
-                      </p>
-                      <p>
-                        <strong>Children:</strong>
-                        <span id="summaryChildren"></span>
-                      </p>
-                      <p>
-                        <strong>Branch:</strong>
-                        <span id="summaryBranch"></span>
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <h5 class="text-end">
-                    <strong>Total Amount:</strong> ₹<span
-                      id="summaryTotal"
-                    ></span>
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="villa-booking-wrapper">
+      <div class="villa-container">
+    
+        <aside class="villa-sidebar">
+          <h2>Villa Booking</h2>
+          <nav>
+            <ul id="villaProgressSteps">
+              <li class="active">Login Selection</li>
+              <li>Personal Details</li>
+              <li>Account Details</li>
+              <li>Stay Details</li>
+              <li>Summary</li>
+              <li>Payment</li>
+            </ul>
+          </nav>
+        </aside>
+        <main class="villa-content-card">
+          <form id="villaBookingForm" autocomplete="off" enctype="multipart/form-data"></form>
+        </main>
       </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-4">
